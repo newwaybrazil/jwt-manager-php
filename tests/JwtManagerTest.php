@@ -1,6 +1,5 @@
 <?php
 
-use \Mockery;
 use JwtManager\JwtManager;
 use PHPUnit\Framework\TestCase;
 
@@ -10,7 +9,7 @@ class JwtManagerTest extends TestCase
     private $context = 'test';
 
     /**
-     * @covers \src\JwtManager::__construct
+     * @covers JwtManager\JwtManager::__construct
      */
     public function testJwtManagerCanBeInstantiated()
     {
@@ -22,7 +21,7 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::getExpire
+     * @covers JwtManager\JwtManager::getExpire
      */
     public function testGetExpire()
     {
@@ -37,10 +36,10 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::generate
-     * @covers \src\JwtManager::getHeader
-     * @covers \src\JwtManager::getPayload
-     * @covers \src\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::generate
+     * @covers JwtManager\JwtManager::getHeader
+     * @covers JwtManager\JwtManager::getPayload
+     * @covers JwtManager\JwtManager::getSignature
      */
     public function testGenerate()
     {
@@ -56,9 +55,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::isValid
-     * @covers \src\JwtManager::splitParts
-     * @covers \src\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::isValid
+     * @covers JwtManager\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::getSignature
      */
     public function testIsValid()
     {
@@ -78,9 +77,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::isValid
-     * @covers \src\JwtManager::splitParts
-     * @covers \src\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::isValid
+     * @covers JwtManager\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::getSignature
      * @expectedException \Exception
      */
     public function testInvalidFormat()
@@ -94,9 +93,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::isValid
-     * @covers \src\JwtManager::splitParts
-     * @covers \src\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::isValid
+     * @covers JwtManager\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::getSignature
      * @expectedException \Exception
      */
     public function testIsNotValid()
@@ -112,8 +111,8 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::isOnTime
-     * @covers \src\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::isOnTime
+     * @covers JwtManager\JwtManager::decodePayload
      */
     public function testIsOnTime()
     {
@@ -130,8 +129,8 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::isOnTime
-     * @covers \src\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::isOnTime
+     * @covers JwtManager\JwtManager::decodePayload
      * @expectedException \Exception
      */
     public function testIsOnTimeMissingIatExp()
@@ -151,9 +150,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::isOnTime
-     * @covers \src\JwtManager::decodePayload
-     * @covers \src\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::isOnTime
+     * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::splitParts
      * @expectedException \Exception
      */
     public function testIsNotOnTime()
@@ -169,9 +168,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::tokenNeedToRefresh
-     * @covers \src\JwtManager::decodePayload
-     * @covers \src\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::tokenNeedToRefresh
+     * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::splitParts
      */
     public function testTokenNeedToRefresh()
     {
@@ -191,9 +190,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::tokenNeedToRefresh
-     * @covers \src\JwtManager::decodePayload
-     * @covers \src\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::tokenNeedToRefresh
+     * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::splitParts
      * @expectedException \Exception
      */
     public function testTokenNeedToRefreshMissingIatExp()
@@ -213,9 +212,9 @@ class JwtManagerTest extends TestCase
     }
 
     /**
-     * @covers \src\JwtManager::tokenNeedToRefresh
-     * @covers \src\JwtManager::decodePayload
-     * @covers \src\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::tokenNeedToRefresh
+     * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::splitParts
      */
     public function testTokenNotNeedToRefresh()
     {
@@ -233,6 +232,5 @@ class JwtManagerTest extends TestCase
 
     public function tearDown()
     {
-        Mockery::close();
     }
 }
