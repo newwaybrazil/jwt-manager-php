@@ -59,7 +59,7 @@ class JwtManager
         $payload = [
             'aud' => $audience,
             'exp' => $this->expire,
-            'iat' => time(date('Y-m-d H:i:s')),
+            'iat' => time(),
             'iss' => $this->context,
             'sub' => $subject,
         ];
