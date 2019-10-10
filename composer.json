@@ -1,7 +1,7 @@
 {
     "name": "newwaybrazil/jwt-manager-php",
     "description": "PHP library to manage jwt authentication",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "type": "library",
     "license": "GPL-3.0-only",
     "require": {
