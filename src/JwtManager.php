@@ -58,7 +58,7 @@ class JwtManager
     ): string {
         $payload = [
             'aud' => $audience,
-            'exp' => $this->expire,
+            'exp' => time() + $this->expire,
             'iat' => time(),
             'iss' => $this->context,
             'sub' => $subject,
