@@ -80,7 +80,7 @@ class JwtManager
         $signature = hash_hmac(
             $this->hash,
             $header . '.' . $payload,
-            $this->appSecret . $this->context,
+            $this->appSecret,
             true
         );
         return $this->base64UrlEncode($signature);
