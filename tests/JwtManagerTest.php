@@ -40,6 +40,7 @@ class JwtManagerTest extends TestCase
      * @covers JwtManager\JwtManager::getHeader
      * @covers JwtManager\JwtManager::getPayload
      * @covers JwtManager\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::base64UrlEncode
      */
     public function testGenerate()
     {
@@ -58,6 +59,7 @@ class JwtManagerTest extends TestCase
      * @covers JwtManager\JwtManager::isValid
      * @covers JwtManager\JwtManager::splitParts
      * @covers JwtManager\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::base64UrlEncode
      */
     public function testIsValid()
     {
@@ -80,6 +82,7 @@ class JwtManagerTest extends TestCase
      * @covers JwtManager\JwtManager::isValid
      * @covers JwtManager\JwtManager::splitParts
      * @covers JwtManager\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::base64UrlEncode
      * @expectedException \Exception
      */
     public function testInvalidFormat()
@@ -96,6 +99,7 @@ class JwtManagerTest extends TestCase
      * @covers JwtManager\JwtManager::isValid
      * @covers JwtManager\JwtManager::splitParts
      * @covers JwtManager\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::base64UrlEncode
      * @expectedException \Exception
      */
     public function testIsNotValid()
@@ -113,6 +117,7 @@ class JwtManagerTest extends TestCase
     /**
      * @covers JwtManager\JwtManager::isOnTime
      * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::base64UrlDecode
      */
     public function testIsOnTime()
     {
@@ -131,6 +136,7 @@ class JwtManagerTest extends TestCase
     /**
      * @covers JwtManager\JwtManager::isOnTime
      * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::base64UrlDecode
      * @expectedException \Exception
      */
     public function testIsOnTimeMissingIatExp()
@@ -152,6 +158,7 @@ class JwtManagerTest extends TestCase
     /**
      * @covers JwtManager\JwtManager::isOnTime
      * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::base64UrlDecode
      * @covers JwtManager\JwtManager::splitParts
      * @expectedException \Exception
      */
@@ -170,6 +177,7 @@ class JwtManagerTest extends TestCase
     /**
      * @covers JwtManager\JwtManager::tokenNeedToRefresh
      * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::base64UrlDecode
      * @covers JwtManager\JwtManager::splitParts
      */
     public function testTokenNeedToRefresh()
@@ -192,6 +200,7 @@ class JwtManagerTest extends TestCase
     /**
      * @covers JwtManager\JwtManager::tokenNeedToRefresh
      * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::base64UrlDecode
      * @covers JwtManager\JwtManager::splitParts
      * @expectedException \Exception
      */
@@ -214,6 +223,7 @@ class JwtManagerTest extends TestCase
     /**
      * @covers JwtManager\JwtManager::tokenNeedToRefresh
      * @covers JwtManager\JwtManager::decodePayload
+     * @covers JwtManager\JwtManager::base64UrlDecode
      * @covers JwtManager\JwtManager::splitParts
      */
     public function testTokenNotNeedToRefresh()

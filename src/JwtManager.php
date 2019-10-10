@@ -43,7 +43,7 @@ class JwtManager
             'typ' => $this->type,
         ];
         $header = json_encode($header);
-        return base64_encode($header);
+        return $this->base64UrlEncode($header);
     }
 
     /**
@@ -64,7 +64,7 @@ class JwtManager
             'sub' => $subject,
         ];
         $payload = json_encode($payload);
-        return base64_encode($payload);
+        return $this->base64UrlEncode($payload);
     }
 
     /**
@@ -83,7 +83,7 @@ class JwtManager
             $this->appSecret . $this->context,
             true
         );
-        return base64_encode($signature);
+        return $this->base64UrlEncode($signature);
     }
 
     /**
@@ -145,7 +145,7 @@ class JwtManager
         $part = $this->splitParts($token);
         $valid = $this->getSignature($part['header'], $part['payload']);
 
-        if ($part['signature'] !== $valid) {
+        if ($part['signature'] !== $valid && $part['signature'] !== $valid.'=') {
             throw new \Exception('Invalid JWT Token', 401);
         }
         return true;
@@ -210,7 +210,32 @@ class JwtManager
         $part = $this->splitParts($token);
         $payload = $part['payload'];
 
-        $data = base64_decode($payload);
+        $data = $this->base64UrlDecode($payload);
         return json_decode($data, true);
+    }
+
+    /**
+     * encode url base64
+     * @param string $data
+     * @return string
+     */
+    public function base64UrlEncode(
+        string $data
+    ): string {
+        $data = base64_encode($data);
+        $data = strtr($data, '+/', '-_');
+        return rtrim($data, '=');
+    }
+
+    /**
+     * decode url base64
+     * @param string $data
+     * @return string
+     */
+    public function base64UrlDecode(
+        $data
+    ) {
+        $data = strtr($data, '-_', '+/');
+        return base64_decode($data);
     }
 }
