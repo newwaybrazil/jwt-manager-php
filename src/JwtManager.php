@@ -167,7 +167,7 @@ class JwtManager
             throw new \Exception('Invalid JWT Token', 401);
         }
 
-        $validUntil = date('Y-m-d H:i:s', $iat + $exp);
+        $validUntil = date('Y-m-d H:i:s', $exp);
         $moment = date('Y-m-d H:i:s');
         if ($moment > $validUntil) {
             throw new \Exception('Expired JWT Token', 401);
