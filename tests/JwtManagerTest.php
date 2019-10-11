@@ -63,10 +63,11 @@ class JwtManagerTest extends TestCase
      */
     public function testIsValid()
     {
-        $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'.
-            'eyJhdWQiOiJ0b2tlbiIsImV4cCI6OTAwLCJpYXQiOjE1NTk0MjY4MjksImlzcyI6InRlc'.
-            '3QiLCJzdWIiOiI2ODE2MmRjMS1hMzkyLTQ5MWYtOWQ0Ni02MzlmMGUwZjE3OWQifQ==.'.
-            '2QLo4djFNX4hm2FcNcGNRKkERgt26dEaqjhglpC2jPM=';
+        $JwtManager = new JwtManager(
+            $this->appSecret,
+            $this->context
+        );
+        $token = $JwtManager->generate('token', '68162dc1-a392-491f-9d46-639f0e0f179d');
         $JwtManager = new JwtManager(
             $this->appSecret,
             $this->context
