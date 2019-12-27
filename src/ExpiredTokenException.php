@@ -4,6 +4,6 @@ namespace JwtManager;
 
 use Exception;
 
-class isOnTimeException extends Exception
+class ExpiredTokenException extends Exception
 {
 }

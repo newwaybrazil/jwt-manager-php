@@ -131,7 +131,7 @@ class JwtManager
     /**
      * check if is a valid token
      * @param string $token
-     * @throws isValidException
+     * @throws InvalidTokenException
      * @return bool
      */
     public function isValid(
@@ -139,14 +139,14 @@ class JwtManager
     ): bool {
         $correctFormat = preg_match('^([a-zA-Z0-9_=]{4,})\.([a-zA-Z0-9_=]{4,})\.([a-zA-Z0-9_\-\+\/=]{4,})^', $token);
         if (!$correctFormat) {
-            throw new isValidException('Invalid JWT Token', 401);
+            throw new InvalidTokenException('Invalid JWT Token', 401);
         }
 
         $part = $this->splitParts($token);
         $valid = $this->getSignature($part['header'], $part['payload']);
 
         if ($part['signature'] !== $valid && $part['signature'] !== $valid.'=') {
-            throw new isValidException('Invalid JWT Token', 401);
+            throw new InvalidTokenException('Invalid JWT Token', 401);
         }
         return true;
     }
@@ -154,7 +154,8 @@ class JwtManager
     /**
      * check if token is on time
      * @param string $token
-     * @throws isOnTimeException
+     * @throws InvalidTokenException
+     * @throws ExpiredTokenException
      * @return bool
      */
     public function isOnTime(
@@ -164,13 +165,13 @@ class JwtManager
         $iat = $payload['iat'] ?? null;
         $exp = $payload['exp'] ?? null;
         if (empty($iat) || empty($exp)) {
-            throw new isOnTimeException('Invalid JWT Token', 401);
+            throw new InvalidTokenException('Invalid JWT Token', 401);
         }
 
         $validUntil = date('Y-m-d H:i:s', $exp);
         $moment = date('Y-m-d H:i:s');
         if ($moment > $validUntil) {
-            throw new isOnTimeException('Expired JWT Token', 401);
+            throw new ExpiredTokenException('Expired JWT Token', 401);
         }
         return true;
     }
@@ -178,7 +179,7 @@ class JwtManager
     /**
      * check if is need refresh token
      * @param string $token
-     * @throws tokenNeedToRefreshException
+     * @throws InvalidTokenException
      * @return bool
      */
     public function tokenNeedToRefresh(
@@ -188,7 +189,7 @@ class JwtManager
         $iat = $payload['iat'] ?? null;
         $exp = $payload['exp'] ?? null;
         if (empty($iat) || empty($exp)) {
-            throw new tokenNeedToRefreshException('Invalid JWT Token', 401);
+            throw new InvalidTokenException('Invalid JWT Token', 401);
         }
 
         $almostExpired = date('Y-m-d H:i:s', $iat + $this->renew);

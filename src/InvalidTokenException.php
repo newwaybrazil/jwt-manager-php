@@ -4,6 +4,6 @@ namespace JwtManager;
 
 use Exception;
 
-class isValidException extends Exception
+class InvalidTokenException extends Exception
 {
 }
